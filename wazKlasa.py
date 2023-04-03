@@ -1,15 +1,26 @@
 import pygame
 
+
 class WazKlas():
     #konstruktor klasy - uruchamia się podczas tworzenia obiektu
     def __init__(self):
-        self.pozycje[(300,300)]
+        self.pozycje=[(300,300)]
         self.dlugosc=1
         self.kierunek=[0,1]
         self.punkty=0
     #ustalanie kierunku węża
     def setDirection(self, direction):
         self.kierunek=direction
+    
+    #dodawanie punktów
+    def addScore(self):
+        self.punkty=self.punkty+1
+    #zerowanie punktów
+    def clearScore(self):
+        self.punkty=0
+    #dodawanie długości węża
+    def addLenght(self):
+        self.dlugosc+=1
     #pobieranie współrzednych głowy węża
     def getHeadPosition(self):
         return self.pozycje[-1]
@@ -20,15 +31,17 @@ class WazKlas():
         #ustalenie nowej pozycji węża
         zmiennaX=ostatniaPozycja[0]+self.kierunek[0]*30;
         zmiennaY=ostatniaPozycja[1]+self.kierunek[1]*30;
+        #sprawdzenie położenia weża względem krawędzi
         noweWspolrzedne=self.checkBorder(zmiennaX,zmiennaY)
         #dodanie pozycji węża do listy
         self.pozycje.append(noweWspolrzedne)
-        #sprawdzenie czy waż nie jest za długi
+        #sprawdzenie czy wąż nie jest za długi
         if len(self.pozycje)>self.dlugosc:
             del self.pozycje[0]
+    
     #sprawdzanie krawędzi okna
-    def checkBorder(zmiennaX,zmiennaY):
-        #sprawdzanie krawędzi
+    def checkBorder(self,zmiennaX,zmiennaY):
+         #sprawdzanie krawędzi
         if zmiennaX>=600:
             zmiennaX=0
         if zmiennaX<0:
