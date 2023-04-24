@@ -4,11 +4,24 @@ import pygame
 #import kodu z klasą wąż
 import wazKlasa
 
+#importujemy kod z pliku jablko
+import jablko
+
 #tworzenie obiektu wąż
 obiektWaz1=wazKlasa.WazKlas()
 
+#utowrzenie obiektów jabłek
+#określenie ile będzie jabłek
+iloscJablek=10
+
+
 #utworzenie funkcji waz
 def waz():
+    #tworzenie obiektu do przechowywania jablek
+    obiektJablko=[]
+    for nrJablko in range(0,iloscJablek):
+        obiektJablko.append(jablko.Jablko())
+
     #inicjalizacja biblioteki
     pygame.init()
     #utworzenie okna gry i okreslenie jego rozmiarów
@@ -18,12 +31,10 @@ def waz():
     #tworzymy zmienną, która przechowuje informacje czy gra jest uruchomiona
     run=True
    
-
-    #pozycja startowa jabłka
-    jablkoX=random.randint(0,19)*30
-    jablkoY=random.randint(0,19)*30
+    
     punkty=0
 
+  
     #pętla while sprawdza czy warunek w zmiennej run jest prawdziwy, jak jest nieprawdziwy kończy swoje działanie
     while(run):
         #Wypełnienie okna kolorem
@@ -48,24 +59,27 @@ def waz():
         #ustalenie nowej pozycji węża
 
         obiektWaz1.snakeMove()
-
+                
+       
         #pozycja głowy weza
         glowa=obiektWaz1.getHeadPosition()
-        #zjadanie jabłka
-        if glowa[0]==jablkoX and glowa[1] == jablkoY:
-            jablkoX=random.randint(0,19)*30
-            jablkoY=random.randint(0,19)*30
-            obiektWaz1.addScore()
-            obiektWaz1.addLenght()
+        #pobieranie pozycji jablka
+        for nrJablka in obiektJablko[::]:
+            pozycjaJablka=nrJablka.getCoordinates()
+            #zjadanie jabłka
+            if glowa[0]==pozycjaJablka[0] and glowa[1] == pozycjaJablka[1]:
+                nrJablka.randomPosition()
+                obiektWaz1.addScore()
+                obiektWaz1.addLenght()
 
-        #rysowanie jabłka
-        pygame.draw.circle(oknoGry,(255,0,0),(jablkoX+15,jablkoY+15),15)
+            #rysowanie jabłka
+            nrJablka.drawApple(oknoGry) 
         #rysowanie węża
         obiektWaz1.snakeDraw(oknoGry)
-
+       
         #napisy na ekranie
         czcionka=pygame.font.SysFont('arial',25)
-        tekst=czcionka.render("Zdobyłeś punkty: {0}".format(punkty),1,(51,51,255))
+        tekst=czcionka.render("Zdobyłeś punkty: {0}".format(obiektWaz1.getPunkty()),1,(51,51,255))
         oknoGry.blit(tekst,(10,10))
         #aktualizowanie zawartości okna gry
         pygame.display.update()
