@@ -33,6 +33,15 @@ class WazKlas():
         zmiennaY=ostatniaPozycja[1]+self.kierunek[1]*30;
         #sprawdzenie położenia weża względem krawędzi
         noweWspolrzedne=self.checkBorder(zmiennaX,zmiennaY)
+
+        #sprawdzanie czy wąż sam siebie nie ugryzł
+        #musimy sprawdzić czy pozycja głowy nie pokrywa się(nie ma tych samych współrzędnych) z pozostałymi pozycjami węża
+        for pozycja in self.pozycje[::]:
+            if noweWspolrzedne == pozycja:
+                self.dlugosc=1
+                self.punkty=0
+                self.pozycje=[noweWspolrzedne]
+                
         #dodanie pozycji węża do listy
         self.pozycje.append(noweWspolrzedne)
         #sprawdzenie czy wąż nie jest za długi
@@ -58,3 +67,5 @@ class WazKlas():
             ksztaltWaz=pygame.Rect((poz[0],poz[1]),(30,30))
             #dodanie kształtu do okienka
             pygame.draw.rect(oknoGry,(100,100,100),ksztaltWaz)
+    def getPunkty(self):
+        return self.punkty

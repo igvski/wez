@@ -10,14 +10,13 @@ import jablko
 #tworzenie obiektu wąż
 obiektWaz1=wazKlasa.WazKlas()
 
-#określanie ile będzie jabłek
+#utowrzenie obiektów jabłek
+#określenie ile będzie jabłek
 iloscJablek=800
-
-#utworzenie obiektu jabłka
-nrJablko=10
 
 #utworzenie funkcji waz
 def waz():
+    #tworzenie obiektu do przechowywania jablek
     obiektJablko=[]
     for nrJablko in range(0,iloscJablek):
         obiektJablko.append(jablko.Jablko())
@@ -32,7 +31,8 @@ def waz():
     run=True
    
     
-    punkty=0
+   
+
   
     #pętla while sprawdza czy warunek w zmiennej run jest prawdziwy, jak jest nieprawdziwy kończy swoje działanie
     while(run):
@@ -71,17 +71,17 @@ def waz():
                 obiektWaz1.addScore()
                 obiektWaz1.addLenght()
 
-             #rysowanie jabłka
-            nrJablka.drawApple(oknoGry)
+            #rysowanie jabłka
+            nrJablka.drawApple(oknoGry) 
         #rysowanie węża
         obiektWaz1.snakeDraw(oknoGry)
        
-         #napisy na ekranie
+        #napisy na ekranie
         czcionka=pygame.font.SysFont('arial',25)
-        tekst=czcionka.render("Zdobyłeś punkty: {0}".format(punkty),1,(51,51,255))
+        tekst=czcionka.render("Zdobyłeś punkty: {0}".format(obiektWaz1.getPunkty()),1,(51,51,255))
         oknoGry.blit(tekst,(10,10))
         #aktualizowanie zawartości okna gry
         pygame.display.update()
 
 #wywołanie funkcji, pozwala na uruchomienie gry
-waz()
+#waz()
