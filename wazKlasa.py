@@ -8,6 +8,10 @@ class WazKlas():
         self.dlugosc=1
         self.kierunek=[0,1]
         self.punkty=0
+        self.kolor=(100,100,100)
+    #ustalanie koloru węża
+    def setColor(self,color):
+        self.kolor=color
     #ustalanie kierunku węża
     def setDirection(self, direction):
         self.kierunek=direction
@@ -66,6 +70,6 @@ class WazKlas():
         #definiujemy kształ węża
             ksztaltWaz=pygame.Rect((poz[0],poz[1]),(30,30))
             #dodanie kształtu do okienka
-            pygame.draw.rect(oknoGry,(100,100,100),ksztaltWaz)
+            pygame.draw.rect(oknoGry,self.kolor,ksztaltWaz)
     def getPunkty(self):
         return self.punkty
