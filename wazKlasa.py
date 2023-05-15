@@ -1,4 +1,5 @@
 import pygame
+import random
 
 
 class WazKlas():
@@ -9,7 +10,7 @@ class WazKlas():
         self.kierunek=[0,1]
         self.punkty=0
         self.kolor=(100,100,100)
-    #ustalanie koloru węża
+    #ustawianie koloru węża
     def setColor(self,color):
         self.kolor=color
     #ustalanie kierunku węża
@@ -73,3 +74,11 @@ class WazKlas():
             pygame.draw.rect(oknoGry,self.kolor,ksztaltWaz)
     def getPunkty(self):
         return self.punkty
+    #sprawdzanie czy ktos mnie ugryzl
+    #w przypadku ugryzienia zeruja sie punkty i straca dlugosc
+    def pozarcie(self, pozycjeGlowyGryzacej):
+        for czesciCiala in self.pozycje[::]:
+            if pozycjeGlowyGryzacej[0]==czesciCiala[0] and pozycjeGlowyGryzacej[1] == czesciCiala[1]:
+                self.dlugosc=1
+                self.punkty=0
+                self.pozycje=[(random.randint(0,waz.rozdzielczosc)*30,random.randint(0,waz.rozdzielczosc)*30)]

@@ -7,6 +7,9 @@ import wazKlasa
 #importujemy kod z pliku jablko
 import jablko
 
+#okreslenie rozdzielczosci - ile jest pol kratek na planszy
+rozdzielczosc=19
+
 #tworzenie obiektu wąż
 obiektWaz1=wazKlasa.WazKlas()
 #tworzenie drugiego węża
@@ -93,7 +96,10 @@ def waz():
                 obiektWaz2.addLenght()
 
             #rysowanie jabłka
-            nrJablka.drawApple(oknoGry) 
+            nrJablka.drawApple(oknoGry)
+        #sprawdzanie czy ktos mnie ugryzl
+        obiektWaz1.pozarcie(glowa2)
+        obiektWaz2.pozarcie(glowa)
         #rysowanie węża
         obiektWaz1.snakeDraw(oknoGry)
         obiektWaz2.snakeDraw(oknoGry)
