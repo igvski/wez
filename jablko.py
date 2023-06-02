@@ -1,26 +1,28 @@
 import random
-import waz
 import pygame
+import wazz
 
 class Jablko():
-    #konstruktor klasy
-    def __init__(self):
-        self.pozycjaJablka=[(1,1)]
+    def __init__(self, rozdzielczosc):
+        self.rozdzielczosc = (rozdzielczosc[0]/30, rozdzielczosc[1]/30)
+        self.pozycja = [(1,1)]
         self.randomPosition()
-    #losowanie pozycji jabłka i zapisanie nowej pozycji do zmiennej pozycjaJablka
+        self.getPosition()
+
+    def ustawRozdzielczosc(self, rozdzielczosc):
+        self.rozdzielczosc = rozdzielczosc
+
+
     def randomPosition(self):
-        jablkoX=random.randint(0,waz.rodzielczosc)*30
-        jablkoY=random.randint(0,waz.rodzielczosc)*30
-        self.setCoordinates(jablkoX,jablkoY)
+        jablkoX=random.randint(0,self.rozdzielczosc[0])*30
+        jablkoY=random.randint(0,self.rozdzielczosc[1])*30
+        self.setPosition(jablkoX, jablkoY)
 
-    #pobranie pozycji jabłka
-    def getCoordinates(self):
-        return self.pozycjaJablka[-1]
+    def getPosition(self):
+        return self.pozycja[-1]
 
-    #ustawienie pozycji jabłka
-    def setCoordinates(self,x,y):
-        self.pozycjaJablka[0]=(x,y)
+    def setPosition(self, x, y):
+        self.pozycja[0] = (x, y)
 
-    #rysowanie jabłka
     def drawApple(self, oknoGry):
-        pygame.draw.circle(oknoGry,(255,0,0),(self.pozycjaJablka[0][0]+15,self.pozycjaJablka[0][1]+15),15)
+        pygame.draw.circle(oknoGry,(255,0,0),(self.pozycja[0][0]+15,self.pozycja[0][1]+15),15)
